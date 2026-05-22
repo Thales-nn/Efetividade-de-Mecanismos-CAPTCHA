@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificação CAPTCHA</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>🛡️ Verificação de Segurança</h1>
+        <p>Digite o código abaixo para continuar</p>
+        <img src='/static/captcha.png' class='captcha-img'>
+        <form action='/validar' method='post'>
+            <input name='captcha' placeholder='Digite o CAPTCHA' required>
+            <button>Validar</button>
+        </form>
+        {% if erro %}
+            <div class='erro'>❌ CAPTCHA incorreto</div>
+            <a href='/captcha'><button>Tentar novamente</button></a>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

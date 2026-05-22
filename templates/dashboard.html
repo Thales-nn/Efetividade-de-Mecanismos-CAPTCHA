@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard de Métricas</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="dashboard-card big-dashboard">
+        <h1>📊 Dashboard Experimental CAPTCHA</h1>
+        <div class="metrics-grid">
+            <div class="metric-box"><h2>{{total}}</h2><p>Total Testes</p></div>
+            <div class="metric-box success"><h2>{{sucessos}}</h2><p>Sucessos</p></div>
+            <div class="metric-box warning"><h2>{{media}}s</h2><p>Tempo Médio</p></div>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="grafico"></canvas>
+        </div>
+
+        <a href='/'><button>Novo Teste</button></a>
+    </div>
+</div>
+
+<script>
+const ctx = document.getElementById('grafico');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Total', 'Sucessos', 'Falhas'],
+        datasets: [{
+            label: 'Métricas',
+            data: [total, sucessos, total-sucessos]
+        }]
+    }
+});
+</script>
+</body>
+</html>
