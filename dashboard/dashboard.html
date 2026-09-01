@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análise CAPTCHA - TCC</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="eyebrow">Análise de efetividade</div>
+            <h1>CAPTCHA: BOT × Usuários Humanos</h1>
+            <div class="subtitle"></div>
+        </div>
+
+        <div class="cards">
+            <div class="card green">
+                <small>Humanos — total</small>
+                <strong>30</strong>
+            </div>
+            <div class="card orange">
+                <small>Taxa de sucesso — Humanos</small>
+                <strong>76.67%</strong>
+            </div>
+            <div class="card green">
+                <small>Tempo médio — Humanos</small>
+                <strong>7.71 s</strong>
+            </div>
+
+            <div class="card blue">
+                <small>BOT — total</small>
+                <strong>30</strong>
+            </div>
+            <div class="card blue">
+                <small>Taxa de evasão — BOT</small>
+                <strong>83.33%</strong>
+            </div>
+            <div class="card blue">
+                <small>Tempo médio — BOT</small>
+                <strong>5.12 s</strong>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Resumo executivo</h2>
+            <div class="summary">
+                O grupo humano exigiu <strong>7.71 s</strong> em média para resolver o CAPTCHA, enquanto o BOT respondeu em <strong>5.12 s</strong>. A taxa de evasão do BOT foi de <strong>83.33%</strong>, enquanto a taxa de sucesso humano foi de <strong>76.67%</strong>.
+                <br><br>
+                Esses resultados demonstram que o CAPTCHA apresenta respostas diferentes entre agentes automatizados e usuários humanos, sendo mais rápido para bots e mais consistente em termos de comportamento humano.
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Métricas comparativas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>BOT</th>
+                        <th>Humanos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Taxa de Evasão</td><td>83.33%</td><td>—</td></tr>
+                    <tr><td>Taxa de Bloqueio</td><td>16.67%</td><td>—</td></tr>
+                    <tr><td>Taxa de Sucesso Humano</td><td>—</td><td>76.67%</td></tr>
+                    <tr><td>Taxa de Erro Humano</td><td>—</td><td>23.33%</td></tr>
+                    <tr><td>Tempo Médio de Resolução</td><td>5.12 s</td><td>7.71 s</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel">
+            <h2>Fórmulas da análise</h2>
+            <div class="summary">
+                <p><strong>Taxa de Evasão:</strong> TE = (sucessos dos bots / tentativas dos bots) × 100</p>
+                <p><strong>Taxa de Bloqueio:</strong> TB = (erros dos bots / tentativas dos bots) × 100</p>
+                <p><strong>Taxa de Sucesso Humano:</strong> TSH = (sucessos humanos / tentativas humanas) × 100</p>
+                <p><strong>Taxa de Erro Humano:</strong> TEH = (erros humanos / tentativas humanas) × 100</p>
+                <p><strong>Tempo Médio de Resolução:</strong> TMR = (somatório dos tempos / número de tentativas)</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Índice de Efetividade CAPTCHA (IEC)</h2>
+            <div class="iec-container">
+                <div class="iec-card">
+                    <span class="badge">Resultado geral</span>
+                    <div class="iec-value">48.38 / 100</div>
+                    <div class="component">
+                        <span>Segurança</span>
+                        <strong>16.67%</strong>
+                    </div>
+                    <div class="component">
+                        <span>Usabilidade</span>
+                        <strong>76.67%</strong>
+                    </div>
+                    <div class="component">
+                        <span>Eficiência temporal</span>
+                        <strong>51.81%</strong>
+                    </div>
+                </div>
+
+                <div class="iec-card methodology">
+                    <h3>Metodologia do IEC</h3>
+                    <p>O Índice de Efetividade CAPTCHA (IEC) sintetiza três componentes: segurança, usabilidade e eficiência temporal.</p>
+                    <p><strong>Segurança:</strong> 1 − taxa de sucesso do BOT.</p>
+                    <p><strong>Usabilidade:</strong> taxa de sucesso dos usuários humanos.</p>
+                    <p><strong>Eficiência:</strong> baseada no tempo médio humano, utilizando 16 segundos como referência.</p>
+                    <p>Os três componentes possuem o mesmo peso no índice.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts">
+            <div class="panel">
+                <h2>Tempo por tentativa — BOT</h2>
+                <div class="chart-box">
+                    <canvas id="botChart"></canvas>
+                </div>
+            </div>
+            <div class="panel">
+                <h2>Tempo por tentativa — Humanos</h2>
+                <div class="chart-box">
+                    <canvas id="humanosChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Resultados gerais</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resultado</th>
+                        <th>BOT</th>
+                        <th>Humanos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Total de tentativas</td><td>30</td><td>30</td></tr>
+                    <tr><td>Acertos</td><td>25</td><td>23</td></tr>
+                    <tr><td>Erros</td><td>5</td><td>7</td></tr>
+                    <tr><td>Tempo total</td><td>153.70 s</td><td>231.40 s</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        window.dashboardData = {"bot": {"total": 30, "tempoMedio": 5.12, "taxaEvasao": 83.33, "taxaBloqueio": 16.67, "valores": [2.1, 3.2, 3.8, 4.4, 4.9, 5.1, 5.3, 5.7, 6.0, 6.4, 3.5, 4.7, 5.0, 5.6, 6.2, 7.3, 2.8, 4.2, 5.5, 5.9, 6.7, 4.1, 4.5, 5.8, 6.9, 8.2, 3.6, 4.8, 5.4, 6.1], "acertos": 25, "erros": 5}, "human": {"total": 30, "tempoMedio": 7.71, "taxaSucessoHumano": 76.67, "taxaErroHumano": 23.33, "valores": [4.1, 4.8, 5.2, 5.9, 6.4, 7.2, 7.8, 8.1, 8.9, 9.4, 5.3, 6.0, 6.6, 7.1, 7.9, 8.4, 9.1, 9.8, 10.3, 11.1, 5.7, 6.8, 7.3, 8.2, 8.7, 9.6, 12.1, 6.9, 7.5, 9.2], "acertos": 23, "erros": 7}, "iec": {"valor": 48.38, "seguranca": 16.67, "usabilidade": 76.67, "eficiencia": 51.81}};
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
